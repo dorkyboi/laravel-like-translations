@@ -1,0 +1,1 @@
+# laravel-like-translations
