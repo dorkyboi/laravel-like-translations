@@ -15,17 +15,14 @@
         "url": "git+https://github.com/dorkyboi/laravel-like-translations.git"
     },
     "keywords": [
-        "react",
         "translation",
-        "internationalization"
+        "internationalization",
+        "typescript",
+        "javascript",
+        "laravel"
     ],
-    "peerDependencies": {
-        "react": "*"
-    },
     "devDependencies": {
-        "react": "18.1.0",
-        "typescript": "^4.9.4",
-        "@types/react": "~18.0.14"
+        "typescript": "^4.9.4"
     },
     "license": "MIT"
 }
