@@ -1,12 +1,10 @@
 # laravel-like-translations
 Javascript internalisation helper with nested translations and dot notation access.
-```javascript
-translate("ke", "en");
-//          ^
-//          "key1"
-//          "keys.a"
-//          "keys.b"
-```
+
+### Features
+- Pluralisation
+- Placeholder replacements with automatic capitalisation and turn to uppercase
+- Typescript-based autocomplete
 
 Heavily inspired by Laravel's internationalisation system
 
@@ -66,6 +64,25 @@ export default translator;
 import translator from "./helpers/translator";
 // ...
 const translated = translator("key1", "en");
+```
+
+## Pluralisation and placeholders
+Third argument allows you to engage pluralisation and placeholder replacement.
+Number or string is used in `:count` placeholder:
+```
+"I have one apple|I have :count apples"
+translate(..., ..., 4)    // "I have 4 apples"
+translate(..., ..., "10") // "I have 10 apples"
+translate(..., ..., 1)    // "I have one apple"
+```
+You can also pass an object, where keys correspond to names of placeholders:
+```
+translate(..., ..., {
+    name: "john"
+});
+"My name is :name" => "My name is john"
+"My name is :Name" => "My name is John"
+"My name is :NAME" => "My name is JOHN"
 ```
 
 ## React implementation
