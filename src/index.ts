@@ -3,6 +3,7 @@ import {Paths, TranslationReplacements} from "./types";
 export interface MakeTranslatorConfig<Shape, T extends { [key: string]: Shape } = { [key: string]: Shape }> {
     translations: T,
     fallbackLocale?: keyof T,
+    hidePluralisationWarnings?: boolean;
 }
 
 function deepGet(obj: any, path: string): string | undefined {
@@ -38,6 +39,7 @@ const applyReplacements = (message: string, replacements: TranslationReplacement
 function makeTranslator<Shape, T extends { [key: string]: Shape } = { [key: string]: Shape }>({
     translations,
     fallbackLocale,
+    hidePluralisationWarnings,
 }: MakeTranslatorConfig<Shape, T>) {
     return function translate(key: Paths<Shape>, locale: keyof T, replacements?: number | string | TranslationReplacements) {
         let translated = deepGet(translations[locale], key);
@@ -65,12 +67,11 @@ function makeTranslator<Shape, T extends { [key: string]: Shape } = { [key: stri
         if (replacementsObject.count !== undefined) {
             const variants = translated.split('|');
 
-            if (variants.length < 2) {
+            if (variants.length < 2 && !hidePluralisationWarnings) {
                 console.warn('Translation for "' + key + '" is supposed to have pluralization variants');
-                return key;
             }
 
-            translated = variants[replacementsObject.count === 1 ? 0 : 1];
+            translated = variants.length === 1 ? variants[0] : variants[replacementsObject.count === 1 ? 0 : 1];
 
             if (translated === undefined) {
                 console.warn('Missing pluralization variant of "' + key + '" for count "' + replacementsObject.count + '"');

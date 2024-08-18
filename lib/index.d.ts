@@ -6,11 +6,12 @@ export interface MakeTranslatorConfig<Shape, T extends {
 }> {
     translations: T;
     fallbackLocale?: keyof T;
+    hidePluralisationWarnings?: boolean;
 }
 declare function makeTranslator<Shape, T extends {
     [key: string]: Shape;
 } = {
     [key: string]: Shape;
-}>({ translations, fallbackLocale, }: MakeTranslatorConfig<Shape, T>): (key: Paths<Shape>, locale: keyof T, replacements?: number | string | TranslationReplacements) => string;
+}>({ translations, fallbackLocale, hidePluralisationWarnings, }: MakeTranslatorConfig<Shape, T>): (key: Paths<Shape>, locale: keyof T, replacements?: number | string | TranslationReplacements) => string;
 export default makeTranslator;
 //# sourceMappingURL=index.d.ts.map
