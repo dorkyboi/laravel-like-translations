@@ -50,9 +50,17 @@ function makeTranslator<Shape, T extends { [key: string]: Shape } = { [key: stri
         if (!translated)
             return key;
 
-        const replacementsObject = typeof replacements === 'number' || typeof replacements === 'string'
-            ? { count: +replacements }
-            : replacements;
+        let replacementsObject = null;
+        if (replacements) {
+            if (typeof replacements === "object")
+                replacementsObject = replacements;
+
+            if (typeof replacements === "number")
+                replacementsObject = {count: replacements};
+
+            if (typeof replacements === "string")
+                replacementsObject = {default: replacements};
+        }
 
         // If no need for customization, simply return translated string
         if (!replacementsObject)
