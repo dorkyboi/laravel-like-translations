@@ -1,7 +1,7 @@
 {
     "name": "laravel-like-translations",
     "description": "Laravel-inspired translation/internationalization library",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "private": false,
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
