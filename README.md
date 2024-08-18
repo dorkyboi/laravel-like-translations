@@ -68,12 +68,16 @@ const translated = translator("key1", "en");
 
 ## Pluralisation and placeholders
 Third argument allows you to engage pluralisation and placeholder replacement.
-Number or string is used in `:count` placeholder:
+Number is used in `:count` placeholder:
 ```
 "I have one apple|I have :count apples"
 translate(..., ..., 4)    // "I have 4 apples"
-translate(..., ..., "10") // "I have 10 apples"
 translate(..., ..., 1)    // "I have one apple"
+```
+String is used in `:default` placeholder:
+```
+"Your username is :default"
+translate(..., ..., "cool_nickname")    // "Your username is cool_nickname"
 ```
 You can also pass an object, where keys correspond to names of placeholders:
 ```
